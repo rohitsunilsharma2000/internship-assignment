@@ -1,161 +1,157 @@
 
+---
+
+## 🏥 MODULES AND DETAILED USE CASES
 
 ---
 
-🚀 Hiring Task: Full-Stack Hospital Management System (HMS)
+## 1️⃣ **OPD (Outpatient Department)** – Walk-in or scheduled patients
 
-🏥 Project Title: SmartHMS – Modular Hospital Management System
+### 🔹 Use Case 1: Patient Registration
 
-🎯 Objective:
+* **What it does**: Creates a record for a new patient.
+* **Example**: A receptionist enters name, age, gender, contact, address, photo, and assigns a unique Patient ID.
+* **Purpose**: Helps track visit history, bills, and prescriptions.
 
-Design and implement a modular hospital management system covering key departments:
+### 🔹 Use Case 2: Doctor Appointment Booking
 
-Out-Patient Department (OPD)
+* **What it does**: Lets staff or patients book an appointment with a doctor.
+* **Example**: A patient books Dr. Rakesh at 11:00 AM for a skin rash.
+* **Optional Feature**: SMS/email reminder 1 day before.
 
-In-Patient Department (IPD)
+### 🔹 Use Case 3: Doctor Consultation + Digital Prescription
 
-Pharmacy
+* **What it does**: The doctor writes notes, diagnosis, and prescribes medicine on a digital interface.
+* **Example**: Doctor marks symptoms, adds "Allergic Dermatitis" diagnosis, and prescribes "Cetirizine 10mg".
+* **Outcome**: A downloadable and printable prescription PDF is generated.
 
-Billing & Payments
+### 🔹 Use Case 4: OPD Visit History
 
-
-The system should demonstrate:
-
-Backend: Clean Spring Boot architecture using SOLID principles and design patterns
-
-Database: Use Oracle for persistence
-
-Messaging: Integrate Apache Kafka for event-driven operations (e.g., billing events, admission notifications)
-
-Frontend: A React-based web UI for users (Admin, Doctor, Nurse, Cashier, Pharmacist)
-
-DevOps: Containerized deployment using Docker + Docker Compose
-
-
+* **What it does**: Tracks all previous OPD visits.
+* **Example**: On the 3rd visit, the doctor compares today's symptoms with the last one using the visit timeline.
 
 ---
 
-🧩 Functional Expectations:
+## 2️⃣ **IPD (Inpatient Department)** – Patients admitted in the hospital
 
-1. OPD Module
+### 🔹 Use Case 1: Admission Workflow
 
-Register and manage out-patient visits
+* **What it does**: Admits a patient into the hospital bed/ward.
+* **Example**: Mr. Saha is admitted in General Ward, Bed 4 under Dr. Neha.
+* **Details Captured**: Attendant info, admission notes, insurance.
 
-Allow appointment scheduling with time slots
+### 🔹 Use Case 2: Bed Allocation & Transfer
 
-Enable doctors to record consultation notes and generate prescriptions
+* **What it does**: Assigns, changes, or vacates a bed.
+* **Example**: Shifts patient from General to ICU due to deterioration.
+* **Feature**: Bed availability dashboard with color-coded statuses (vacant/occupied/cleaning).
 
+### 🔹 Use Case 3: Nursing Vitals & Doctor Rounds
 
-2. IPD Module
+* **What it does**: Nurses update vitals like BP, pulse, and doctors record rounds.
+* **Example**: Nurse logs BP = 130/85 every 6 hours, doctor logs notes during morning rounds.
 
-Admit patients into available wards/beds
+### 🔹 Use Case 4: Treatment Plan & Progress
 
-Allow nurse to record vitals and doctors to add daily notes
+* **What it does**: Shows ongoing treatment plan, investigations, and patient progress.
+* **Example**: Shows that blood test is scheduled, medicine is administered, and fever reduced.
 
-Generate discharge summaries with patient progress
+### 🔹 Use Case 5: Discharge Summary Generation
 
-
-3. Pharmacy Module
-
-Maintain inventory with batch and expiry
-
-Dispense medicines based on prescriptions (OPD/IPD)
-
-Track purchase orders and return logs
-
-
-4. Billing Module
-
-Generate bills for OPD visits, IPD stay, and pharmacy transactions
-
-Support partial payments and refunds
-
-Generate downloadable receipts
-
-
+* **What it does**: Creates a final document summarizing the entire stay.
+* **Example**: Shows reason for admission, diagnostics, treatment, medicines, and advice.
+* **Export Options**: PDF, print.
 
 ---
 
-🏗️ Architectural Requirements:
+## 3️⃣ **Pharmacy** – Manage medicines & sales
 
-Implement SOLID principles with layered architecture (Controller, Service, Repository, DTOs, Mappers)
+### 🔹 Use Case 1: Inventory Management
 
-Use appropriate design patterns (e.g., Strategy for billing modes, Factory for patient roles, Observer for Kafka events)
+* **What it does**: Track stock levels of medicines with batch & expiry.
+* **Example**: 50 strips of Paracetamol Batch #101, Expiry: Dec 2025.
+* **Alert**: Low stock or expired batch warning.
 
-Decouple responsibilities using interfaces, DTOs, mappers, and services
+### 🔹 Use Case 2: Prescription Fulfillment
 
-Integrate Kafka to emit/consume events like PatientAdmitted, BillingGenerated, MedicineDispensed
+* **What it does**: Fulfills digital prescriptions from OPD/IPD.
+* **Example**: Pharmacy gets a notification for Mr. Roy’s prescription. Dispenses 10 tablets of Amoxicillin.
 
-Build React UI with views for Admin, Doctor, Nurse, Pharmacist, and Cashier roles
+### 🔹 Use Case 3: Sales with Billing
 
-Use JWT-based authentication with role-based routing on UI
+* **What it does**: Generates retail bill for sold medicines.
+* **Example**: Rs. 350 for 3 medicines, includes tax breakdown, pharmacist name.
 
-Store data in Oracle, use Liquibase/Flyway for schema versioning
+### 🔹 Use Case 4: Return & Refund
 
-Containerize everything using Docker, including:
-
-Spring Boot services
-
-Oracle XE DB
-
-Kafka + Zookeeper
-
-React frontend
-
-NGINX (optional) for frontend delivery
-
-
-
+* **What it does**: Accepts returned medicines and adjusts stock & bill.
+* **Example**: Patient returns 2 unused strips within allowed days.
 
 ---
 
-📦 Deliverables:
+## 4️⃣ **Billing & Payments**
 
-1. ✅ GitHub Repository with:
+### 🔹 Use Case 1: OPD Billing
 
-Docker Compose setup for full stack
+* **What it does**: Calculates consultation + procedure + lab charges.
+* **Example**: Dr. Consultation ₹500 + ECG ₹300 = ₹800 total.
+* **Mode**: Cash/Card/UPI.
 
-Environment README with run instructions
+### 🔹 Use Case 2: IPD Bill Consolidation
 
-SQL migration scripts or Liquibase config
+* **What it does**: Aggregates all costs like bed charges, surgeries, lab tests, pharmacy, doctor visits.
+* **Example**:
 
-Sample data loader
+  * Room charges: ₹3000/day x 3 days = ₹9000
+  * Medicines: ₹1200
+  * Lab: ₹600
+  * Total: ₹10,800
+* **Feature**: Print bill or export PDF.
 
+### 🔹 Use Case 3: Insurance & TPA Handling
 
+* **What it does**: Submit claims to Third Party Admins.
+* **Example**: Bill breakdown with diagnosis and treatments is sent to MediAssist.
 
-2. ✅ Functional React UI
+### 🔹 Use Case 4: Pending Payment Alerts
 
-
-3. ✅ Kafka listeners with logs (e.g., on patient admission, medicine dispense)
-
-
-4. ✅ Oracle database running in a container with seeded data
-
-
-5. ✅ Hosted Demo (e.g., Render, Railway, EC2, or Localhost + ngrok demo video)
-
-
-6. ✅ Documented architecture: folder structure, design pattern rationale, Docker architecture diagram (PDF or README)
-
-
-
+* **What it does**: Alerts staff if any dues left.
+* **Example**: IPD bill partially paid ₹5000, pending ₹3000 shown at discharge time.
 
 ---
 
-👨‍💻 Evaluation Criteria:
+## 🔄 Cross-Module Use Cases
 
-Category	Description
+### ✅ Use Case: Role-Based Access
 
-Code Quality	SOLID principles, clean code, modular structure
-Architecture	Proper service decoupling, reuse, and scalability
-React UI	Functional, responsive, role-based routing
-Kafka Usage	Real event-driven workflows
-Oracle Integration	Clean schema, queries, indexing
-DevOps	Fully working local Docker setup
-Bonus	Deployment on cloud or public demo link
+* **Example**: Only pharmacists can update medicine stock; only billing team can generate final invoices.
 
+### ✅ Use Case: Audit Logs & Reports
 
+* **Example**: Admin can see daily OPD footfall, top 10 prescribed medicines, or outstanding payments.
 
 ---
 
+## ✅ BONUS: Smart Features in Modern HMS
+
+| Feature             | What It Does                                        | Example                                              |
+| ------------------- | --------------------------------------------------- | ---------------------------------------------------- |
+| 🔬 Lab Integration  | Auto-send blood test orders & receive reports       | CBC test ordered from OPD auto-routed to Lab         |
+| 📩 Email/SMS Alerts | Appointment reminders, discharge intimation         | Patient gets SMS: “Your report is ready.”            |
+| 📷 Document Upload  | Upload ID proof, reports, consent forms             | Upload Aadhaar or previous MRI reports               |
+| 📊 Dashboard        | Visual summary of revenue, patients, staff workload | Admin sees: Today: 120 OPD, ₹45k Revenue             |
+| 🌐 Patient Portal   | Login to view history, prescriptions                | Patients download their prescription or bill anytime |
+
+---
+
+## 📌 Summary for a  Developer
+
+| Module   | Simple Analogy                                          |
+| -------- | ------------------------------------------------------- |
+| OPD      | Walk-in clinic visit (register, meet doc, get medicine) |
+| IPD      | Like hotel check-in with rooms, nurse care, discharge   |
+| Pharmacy | Like a medical shop inside hospital                     |
+| Billing  | Like a final checkout counter                           |
+
+---
 
