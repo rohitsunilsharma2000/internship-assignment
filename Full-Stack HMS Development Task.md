@@ -297,20 +297,34 @@ docker-compose up --build
 
 ---
 
-## 📊 Evaluation Criteria
+## 📊 Evaluation Criteria (with Percentage Weights)
 
-| Area                    | Criteria                                                  |
-| ----------------------- | --------------------------------------------------------- |
-| Backend Design          | SOLID compliance, layered structure, clean code           |
-| Kafka Usage             | Event-driven interaction between modules (e.g., Pharmacy) |
-| DB Design               | Relational mapping, constraints, query optimization       |
-| Dockerization           | Clean Dockerfile, Compose with working services           |
-| React UI                | User-friendly, role-based access, dynamic forms           |
-| Code Quality            | Exception handling, logging, validation                   |
-| Testing & Documentation | CURL commands, Swagger, Readme with steps                 |
-| Completeness            | At least 80% of use cases implemented                     |
+| Evaluation Area                     | Description                                                                                              | Weight (%) |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------- |
+| ✅ **Backend Design & Architecture** | Follows SOLID principles, clean separation of layers, design patterns used (Strategy, Builder, Observer) | 20%        |
+| ✅ **Kafka Integration**             | Kafka used effectively for events (e.g., prescription dispatch, admission alerts, stock updates)         | 10%        |
+| ✅ **Database Design (Oracle)**      | Efficient ER modeling, relational constraints, normalized schema, indexing                               | 10%        |
+| ✅ **Frontend UI (React)**           | Intuitive, clean, mobile-responsive UI with proper validation and role-based rendering                   | 15%        |
+| ✅ **Docker & Environment Setup**    | Working Docker Compose for Oracle, Kafka, Spring Boot, and React; proper `.env` usage                    | 10%        |
+| ✅ **Cross-Module Integration**      | End-to-end flow across OPD, IPD, Pharmacy, Billing works as expected                                     | 10%        |
+| ✅ **Testing & Documentation**       | Complete README with curl commands, Swagger docs, test instructions                                      | 10%        |
+| ✅ **Code Quality & Standards**      | Use of DTOs, exception handling, validations, clear variable/method naming                               | 10%        |
+| ✅ **Bonus Features (Optional)**     | PDF exports, audit trail, dashboard charts, patient portal login                                         | 5%         |
 
 ---
+
+### 🎯 Pass Criteria:
+
+* **Minimum Passing Score**: 70%
+* **Bonus consideration** for:
+
+  * Real-time notifications (websocket or Kafka-driven UI refresh)
+  * CI/CD integration or GitHub Actions
+  * Testing: Unit + Integration test coverage > 60%
+
+---
+
+
 
 ## 🧠 Sample Interview Questions
 
