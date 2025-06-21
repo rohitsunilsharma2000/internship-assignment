@@ -5,6 +5,7 @@
 
 ---
 
+
 ## 1️⃣ **OPD (Outpatient Department)** – Walk-in or scheduled patients
 
 ### 🔹 Use Case 1: Patient Registration
@@ -174,6 +175,7 @@
 * **💰 Payment Impact:** Helps reconcile daily earnings & detect fraud.
 
 ---
+<img src="https://raw.githubusercontent.com/rohitsunilsharma2000/internship-assignment/refs/heads/main/workflow.png"/>
 
 ## ✅ BONUS: Smart Features in Modern HMS
 
