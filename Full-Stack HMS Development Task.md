@@ -113,20 +113,169 @@ curl -X POST http://localhost:8080/api/prescriptions \
 
 ---
 
-## 🌐 UI Testing Steps (include in README)
+## 🧪 UI Testing Steps
 
-1. Start React frontend using Docker.
-2. Navigate to: `http://localhost:3000`
-3. Use UI to:
+Follow the steps below to test the **React-based frontend** and verify end-to-end functionality across all modules.
 
-   * Register new patient
-   * Book appointment (dropdown of doctors & slots)
-   * Doctor login & write digital prescription
-   * View past visits
-   * Admit patient & assign bed
-   * Process pharmacy orders
-   * View/print discharge summary
-4. Validate generated PDFs, alerts, and dashboards.
+---
+
+### ✅ **1️⃣ OPD (Outpatient Department)**
+
+#### 🔹 Patient Registration
+
+* Go to `/opd/register`
+* Fill in details: name, age, gender, contact, address, upload photo
+* Submit → Check if a unique Patient ID is generated and displayed
+
+#### 🔹 Doctor Appointment Booking
+
+* Go to `/opd/appointment`
+* Select patient, doctor, date, and available time slot
+* Choose walk-in or online (if online, trigger payment screen)
+* Confirm → View in “Upcoming Appointments”
+
+#### 🔹 Doctor Consultation + Digital Prescription
+
+* Login as doctor → Go to `/opd/consultation`
+* Select today’s appointment
+* Add symptoms, diagnosis, and prescribe medicines
+* Save → Verify PDF prescription is auto-generated and downloadable
+
+#### 🔹 OPD Visit History
+
+* Go to `/opd/history/{patientId}`
+* View all past visits, filters by date/doctor
+* Select any visit → Check symptoms, diagnosis, prescription from previous consultation
+
+---
+
+### ✅ **2️⃣ IPD (Inpatient Department)**
+
+#### 🔹 Admission Workflow
+
+* Go to `/ipd/admit`
+* Select patient → Assign ward, bed, doctor
+* Add admission notes, attendant details
+* Upload insurance if applicable → Submit → Ensure initial deposit flow is triggered
+
+#### 🔹 Bed Allocation & Transfer
+
+* Go to `/ipd/bed-dashboard`
+* View current bed statuses (vacant/occupied/cleaning)
+* Click on a patient → Reallocate to different ward/ICU
+* Ensure old bed is marked for cleaning
+
+#### 🔹 Nursing Vitals & Doctor Rounds
+
+* Go to `/ipd/vitals/{patientId}`
+* Nurse logs BP, temp, pulse at intervals
+* Doctor logs round notes via `/ipd/rounds`
+* Verify if entries are timestamped and shown in timeline
+
+#### 🔹 Treatment Plan & Progress
+
+* Visit `/ipd/treatment/{patientId}`
+* Check active investigations, medication schedules
+* Update status → e.g., “Blood test done”, “Fever subsiding”
+
+#### 🔹 Discharge Summary Generation
+
+* Go to `/ipd/discharge`
+* Select patient → System shows hospitalization summary
+* Click "Generate PDF" → Verify complete info (admission, treatment, final advice)
+* Block download until full bill is cleared
+
+---
+
+### ✅ **3️⃣ Pharmacy**
+
+#### 🔹 Inventory Management
+
+* Go to `/pharmacy/inventory`
+* Add new medicines with batch, quantity, expiry
+* Verify auto-alerts for low stock and near-expiry items
+
+#### 🔹 Prescription Fulfillment
+
+* Go to `/pharmacy/orders`
+* New order auto-arrives when doctor prescribes → Click “Dispense”
+* Select batch, quantity → Update stock
+* Payment required for OPD; IPD items linked to bill
+
+#### 🔹 Sales with Billing
+
+* Go to `/pharmacy/sale`
+* Add medicines manually for over-the-counter sales
+* Generate bill → See tax split and total → Confirm payment method
+
+#### 🔹 Return & Refund
+
+* Go to `/pharmacy/return`
+* Select invoice → Select items to return
+* System updates stock and processes refund (original mode/credit note)
+
+---
+
+### ✅ **4️⃣ Billing & Payments**
+
+#### 🔹 OPD Billing
+
+* Go to `/billing/opd/{appointmentId}`
+* Shows consultation + lab + procedure costs
+* Pay via cash/card/UPI → System marks as “Paid”
+
+#### 🔹 IPD Bill Consolidation
+
+* Go to `/billing/ipd/{patientId}`
+* View charges: room, surgery, medicine, labs
+* Check bill split: paid, pending → Export PDF
+* Mark as paid to unlock discharge summary
+
+#### 🔹 Insurance & TPA Handling
+
+* Go to `/billing/insurance`
+* Upload documents → Select TPA (e.g., MediAssist)
+* Submit → Track status (pending, approved, partial)
+
+#### 🔹 Pending Payment Alerts
+
+* Go to `/billing/dashboard`
+* Check patient list → See unpaid amounts flagged in red
+* Test “Remind” or “Settle Now” button functionality
+
+---
+
+### ✅ **🔄 Cross-Module Testing**
+
+#### 🔹 Role-Based Access
+
+* Login as: Admin, Doctor, Nurse, Pharmacist, Billing Staff
+* Ensure proper access:
+
+  * Pharmacist cannot update bills
+  * Doctor cannot assign beds
+  * Billing staff cannot modify prescriptions
+
+#### 🔹 Audit Logs & Reports
+
+* Go to `/admin/reports`
+* Generate reports:
+
+  * Daily OPD visits
+  * Top 10 prescribed medicines
+  * Unpaid bills
+* Export in Excel/PDF
+
+---
+
+## 📦 Additional UI Notes
+
+* Every form must have validations (required fields, date pickers, number limits)
+* Auto-refresh dashboards every 10 seconds (e.g., beds, vitals)
+* Use breadcrumbs, clear headers, and role-based menu items
+* Responsiveness: Mobile/tablet-friendly interface
+
+
 
 ---
 
