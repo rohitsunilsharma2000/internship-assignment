@@ -196,5 +196,6 @@
 | Pharmacy | Like a medical shop inside hospital                     |
 | Billing  | Like a final checkout counter                           |
 
+
 ---
 
