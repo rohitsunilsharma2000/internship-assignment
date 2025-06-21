@@ -18,12 +18,18 @@
 * **What it does**: Lets staff or patients book an appointment with a doctor.
 * **Example**: A patient books Dr. Rakesh at 11:00 AM for a skin rash.
 * **Optional Feature**: SMS/email reminder 1 day before.
+* **💰 Payment:**
 
+    * **✅ Online Booking:** Advance payment required to confirm.
+
+    * **🚶 Walk-in:**  Pay after consultation at billing counter.
+  
 ### 🔹 Use Case 3: Doctor Consultation + Digital Prescription
 
 * **What it does**: The doctor writes notes, diagnosis, and prescribes medicine on a digital interface.
 * **Example**: Doctor marks symptoms, adds "Allergic Dermatitis" diagnosis, and prescribes "Cetirizine 10mg".
 * **Outcome**: A downloadable and printable prescription PDF is generated.
+   * **💰 Payment Booking:** Paid via OPD consultation bill after service.
 
 ### 🔹 Use Case 4: OPD Visit History
 
@@ -39,29 +45,43 @@
 * **What it does**: Admits a patient into the hospital bed/ward.
 * **Example**: Mr. Saha is admitted in General Ward, Bed 4 under Dr. Neha.
 * **Details Captured**: Attendant info, admission notes, insurance.
+* **💰 Payment:**
 
+    * **✅  Booking:** Initial deposit required before admission (e.g., ₹10,000).
+      
 ### 🔹 Use Case 2: Bed Allocation & Transfer
 
 * **What it does**: Assigns, changes, or vacates a bed.
 * **Example**: Shifts patient from General to ICU due to deterioration.
 * **Feature**: Bed availability dashboard with color-coded statuses (vacant/occupied/cleaning).
+* **💰 Payment:**
 
+    * **✅  Fee:**  ✅ Cost is added to consolidated IPD bill, paid at discharge..
+      
 ### 🔹 Use Case 3: Nursing Vitals & Doctor Rounds
 
 * **What it does**: Nurses update vitals like BP, pulse, and doctors record rounds.
 * **Example**: Nurse logs BP = 130/85 every 6 hours, doctor logs notes during morning rounds.
+* **💰 Payment:**
 
+    * **✅  Fee:**  Rounds included in final IPD bill.
+      
 ### 🔹 Use Case 4: Treatment Plan & Progress
 
 * **What it does**: Shows ongoing treatment plan, investigations, and patient progress.
 * **Example**: Shows that blood test is scheduled, medicine is administered, and fever reduced.
+* **💰 Payment:**
 
+    * **✅  Fee:**  Charges included in final bill or insurance claim.
+      
 ### 🔹 Use Case 5: Discharge Summary Generation
 
 * **What it does**: Creates a final document summarizing the entire stay.
 * **Example**: Shows reason for admission, diagnostics, treatment, medicines, and advice.
 * **Export Options**: PDF, print.
+* **💰 Payment:**
 
+    * **✅  Fee:**   All dues must be cleared before summary is downloaded/printed.
 ---
 
 ## 3️⃣ **Pharmacy** – Manage medicines & sales
@@ -76,17 +96,27 @@
 
 * **What it does**: Fulfills digital prescriptions from OPD/IPD.
 * **Example**: Pharmacy gets a notification for Mr. Roy’s prescription. Dispenses 10 tablets of Amoxicillin.
+* **💰 Payment:**
+
+    * **✅  OPD Patient:**   ✅ Must pay before receiving medicines.
+    * **✅  IPD Patient:**   ✅ Charges added to consolidated bill.
 
 ### 🔹 Use Case 3: Sales with Billing
 
 * **What it does**: Generates retail bill for sold medicines.
 * **Example**: Rs. 350 for 3 medicines, includes tax breakdown, pharmacist name.
+* **💰 Payment:**
 
+    * **✅  Fee:**  ✅ Payment taken before medicine delivery (cash/card/UPI).
+      
 ### 🔹 Use Case 4: Return & Refund
 
 * **What it does**: Accepts returned medicines and adjusts stock & bill.
 * **Example**: Patient returns 2 unused strips within allowed days.
+* **💰 Payment:**
 
+    * **✅  Fee:**   Refund processed to same mode (or credit note issued).
+      
 ---
 
 ## 4️⃣ **Billing & Payments**
@@ -96,7 +126,10 @@
 * **What it does**: Calculates consultation + procedure + lab charges.
 * **Example**: Dr. Consultation ₹500 + ECG ₹300 = ₹800 total.
 * **Mode**: Cash/Card/UPI.
+* **💰 Payment:**
 
+    * **✅  Fee:**  ✅ Must be paid before leaving OPD desk.
+      
 ### 🔹 Use Case 2: IPD Bill Consolidation
 
 * **What it does**: Aggregates all costs like bed charges, surgeries, lab tests, pharmacy, doctor visits.
@@ -107,17 +140,25 @@
   * Lab: ₹600
   * Total: ₹10,800
 * **Feature**: Print bill or export PDF.
+* **💰 Payment:**
 
+    * **✅  Fee:**  ✅ Final bill paid before discharge. Partial payments during stay allowed.
+      
 ### 🔹 Use Case 3: Insurance & TPA Handling
 
 * **What it does**: Submit claims to Third Party Admins.
 * **Example**: Bill breakdown with diagnosis and treatments is sent to MediAssist.
+* **💰 Payment:**
 
+    * **✅  Fee:**  ✅ Covered by insurance; balance paid by patient if any.
+      
 ### 🔹 Use Case 4: Pending Payment Alerts
 
 * **What it does**: Alerts staff if any dues left.
 * **Example**: IPD bill partially paid ₹5000, pending ₹3000 shown at discharge time.
+* **💰 Payment:**
 
+    * **✅  Fee:**   ✅ Full settlement required before exit/discharge.
 ---
 
 ## 🔄 Cross-Module Use Cases
@@ -125,10 +166,12 @@
 ### ✅ Use Case: Role-Based Access
 
 * **Example**: Only pharmacists can update medicine stock; only billing team can generate final invoices.
+* **💰 Payment Impact:** Prevents unauthorized billing/discounts.
 
 ### ✅ Use Case: Audit Logs & Reports
 
 * **Example**: Admin can see daily OPD footfall, top 10 prescribed medicines, or outstanding payments.
+* **💰 Payment Impact:** Helps reconcile daily earnings & detect fraud.
 
 ---
 
