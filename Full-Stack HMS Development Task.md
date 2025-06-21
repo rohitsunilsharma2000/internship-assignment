@@ -326,26 +326,6 @@ docker-compose up --build
 
 
 
-## 🧠 Sample Interview Questions
-
-### ☑️ Backend
-
-1. **Explain how you followed the SOLID principles in your implementation.**
-2. **How is Kafka used in your project? Explain topics and event flow.**
-3. **What design pattern did you use for handling billing logic?**
-
-### ☑️ Frontend
-
-1. **How did you manage state in React (e.g., Redux or Context API)?**
-2. **How do you validate patient form data before submission?**
-
-### ☑️ DevOps
-
-1. **Explain how you containerized Oracle DB and Spring Boot.**
-2. **How can we scale this system if OPD gets 10,000 requests per day?**
-
----
-
 ## ✅ Bonus Points
 
 * PDF export for prescription/discharge
