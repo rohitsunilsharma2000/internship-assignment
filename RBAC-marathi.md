@@ -109,10 +109,10 @@ Here is a **complete list** of:
 | 4  | **HR_MANAGER**      | ADMIN              | Beyond HR scope.                         |  ✅    Working |
 | 5  | **HR_MANAGER**      | DOCTOR             | Not a staff role.                        |  ✅    Working |
 | 6  | **DOCTOR**          | Any role           | Doctors cannot manage users.             |  ✅    Working but change validation message.i.e: ❌ Cannot create any users  |
-| 7  | **NURSE**           | Any role           | Nurses have no access to user creation.  | ❌ Not Working |
-| 8  | **RECEPTIONIST**    | Any role           | Not permitted.                           | ❌ Not Working |
-| 9  | **BILLING CLERK**   | Any role           | No permission.                           | ❌ Not Working |
-| 10 | **PHARMACIST**      | Any role           | No permission.                           | ❌ Not Working |
+| 7  | **NURSE**           | Any role           | Nurses have no access to user creation.  |  ✅    Working but change validation message.i.e: ❌ Cannot create any users  |
+| 8  | **RECEPTIONIST**    | Any role           | Not permitted.                           |  ✅    Working but change validation message.i.e: ❌ Cannot create any users  |
+| 9  | **BILLING CLERK**   | Any role           | No permission.                           | ✅    Working but change validation message.i.e: ❌ Cannot create any users  |
+| 10 | **PHARMACIST**      | Any role           | No permission.                           |  ✅    Working but change validation message.i.e: ❌ Cannot create any users  |
 
 
 ---
