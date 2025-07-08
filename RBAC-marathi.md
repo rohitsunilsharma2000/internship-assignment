@@ -119,17 +119,19 @@ Here is a **complete list** of:
 
 ### ⚠️ Edge Case Scenarios (Special Handling Required)
 
-| Edge Case                                         | Description                                             | Expected Behavior                                                    |
-| ------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------- |
-| 🧪 **Invalid Role in Payload**                    | e.g., `"role": "CEO"` or typo                           | Reject with `400 Bad Request`, return: "Invalid role type."          |
-| 🧾 **Missing Role Field in Request**              | Role field is null/missing                              | Reject with validation error: "Role is required."                    |
-| 🔑 **JWT Token Tampering**                        | User claims a higher role in token                      | Reject with `403 Forbidden`, must validate against DB/secure source. |
-| 🔐 **User Has No Role (Unassigned)**              | Logged-in user has no role                              | Deny creation with message: "User role not assigned."                |
-| 🏛️ **HR\_MANAGER Role Not Configured in System** | Role logic missing in backend enum/map                  | Return 500 or fail gracefully with admin alert.                      |
-| 📜 **Role Hierarchy Changes Over Time**           | HR\_MANAGER may later be allowed to create Doctors      | System should use config-based role matrix, not hardcoded rules.     |
-| 🛑 **Disabled User Account**                      | Logged-in user is deactivated                           | Reject with `401 Unauthorized` or `403 Forbidden`.                   |
-| 📅 **Future Role Activation Date**                | User has role assigned but activation date is in future | Deny with message: "Role not yet active."                            |
-| 🧪 **Case-Sensitive Role Input**                  | `"doctor"` instead of `"DOCTOR"`                        | Enforce strict case or normalize input.                              |
+
+
+| #   | Edge Case                                         | Description                                             | Expected Behavior                                                    | Working Status |
+| --- | ------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------- | -------------- |
+| 1️⃣ | 🧪 **Invalid Role in Payload**                    | e.g., `"role": "CEO"` or typo                           | Reject with `400 Bad Request`, return: "Invalid role type."          | ❌              |
+| 2️⃣ | 🧾 **Missing Role Field in Request**              | Role field is null/missing                              | Reject with validation error: "Role is required."                    | ❌              |
+| 3️⃣ | 🔑 **JWT Token Tampering**                        | User claims a higher role in token                      | Reject with `403 Forbidden`, must validate against DB/secure source. | ❌              |
+| 4️⃣ | 🔐 **User Has No Role (Unassigned)**              | Logged-in user has no role                              | Deny creation with message: "User role not assigned."                | ❌              |
+| 5️⃣ | 🏛️ **HR\_MANAGER Role Not Configured in System** | Role logic missing in backend enum/map                  | Return 500 or fail gracefully with admin alert.                      | ❌              |
+| 6️⃣ | 📜 **Role Hierarchy Changes Over Time**           | HR\_MANAGER may later be allowed to create Doctors      | System should use config-based role matrix, not hardcoded rules.     | ❌              |
+| 7️⃣ | 🛑 **Disabled User Account**                      | Logged-in user is deactivated                           | Reject with `401 Unauthorized` or `403 Forbidden`.                   | ❌              |
+| 8️⃣ | 📅 **Future Role Activation Date**                | User has role assigned but activation date is in future | Deny with message: "Role not yet active."                            | ❌              |
+| 9️⃣ | 🧪 **Case-Sensitive Role Input**                  | `"doctor"` instead of `"DOCTOR"`                        | Enforce strict case or normalize input.                              | ❌              |
 
 ---
 
