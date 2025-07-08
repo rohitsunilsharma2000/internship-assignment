@@ -108,7 +108,7 @@ Here is a **complete list** of:
 | 3  | **HR_MANAGER**      | SUPER_ADMIN        | Not permitted.                           |  ✅    Working |
 | 4  | **HR_MANAGER**      | ADMIN              | Beyond HR scope.                         |  ✅    Working |
 | 5  | **HR_MANAGER**      | DOCTOR             | Not a staff role.                        |  ✅    Working |
-| 6  | **DOCTOR**          | Any role           | Doctors cannot manage users.             | Working but change validation message  |
+| 6  | **DOCTOR**          | Any role           | Doctors cannot manage users.             |  ✅    Working but change validation message.i.e: ❌ Cannot create any users  |
 | 7  | **NURSE**           | Any role           | Nurses have no access to user creation.  | ❌ Not Working |
 | 8  | **RECEPTIONIST**    | Any role           | Not permitted.                           | ❌ Not Working |
 | 9  | **BILLING CLERK**   | Any role           | No permission.                           | ❌ Not Working |
