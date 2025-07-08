@@ -80,3 +80,56 @@ Ensure that each role can only create specific types of users based on predefine
 
 ---
 
+
+Here is a **complete list** of:
+
+* ✅ **Positive Case Scenarios**: When role-based user creation is allowed
+* ❌ **Negative Case Scenarios**: When role-based creation should be denied
+* ⚠️ **Edge Case Scenarios**: Unusual but important conditions to handle for robustness
+
+---
+
+### ✅ Positive Case Scenarios (Allowed Role Creations)
+
+| Logged-In User Role | Can Create These Roles                                        | Reason                                                  |
+| ------------------- | ------------------------------------------------------------- | ------------------------------------------------------- |
+| **SUPER\_ADMIN**    | ADMIN, DOCTOR, NURSE, RECEPTIONIST, BILLING CLERK, PHARMACIST | Has full authority to manage the organization.          |
+| **ADMIN**           | DOCTOR, NURSE, RECEPTIONIST, BILLING CLERK, PHARMACIST        | Handles hospital operations, but not strategic control. |
+| **HR\_MANAGER**     | NURSE, RECEPTIONIST, BILLING CLERK                            | Focused on staff hiring, not admin or doctors.          |
+
+---
+
+### ❌ Negative Case Scenarios (Denied Role Creations)
+
+| Logged-In User Role | Attempted Creation | ❌ Reason                                |
+| ------------------- | ------------------ | --------------------------------------- |
+| **ADMIN**           | SUPER\_ADMIN       | Cannot assign top-level role.           |
+| **ADMIN**           | ADMIN              | Cannot create peers.                    |
+| **HR\_MANAGER**     | SUPER\_ADMIN       | Not permitted.                          |
+| **HR\_MANAGER**     | ADMIN              | Beyond HR scope.                        |
+| **HR\_MANAGER**     | DOCTOR             | Not a staff role.                       |
+| **DOCTOR**          | Any role           | Doctors cannot manage users.            |
+| **NURSE**           | Any role           | Nurses have no access to user creation. |
+| **RECEPTIONIST**    | Any role           | Not permitted.                          |
+| **BILLING CLERK**   | Any role           | No permission.                          |
+| **PHARMACIST**      | Any role           | No permission.                          |
+
+---
+
+### ⚠️ Edge Case Scenarios (Special Handling Required)
+
+| Edge Case                                         | Description                                             | Expected Behavior                                                    |
+| ------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------- |
+| 🧪 **Invalid Role in Payload**                    | e.g., `"role": "CEO"` or typo                           | Reject with `400 Bad Request`, return: "Invalid role type."          |
+| 🧾 **Missing Role Field in Request**              | Role field is null/missing                              | Reject with validation error: "Role is required."                    |
+| 🔑 **JWT Token Tampering**                        | User claims a higher role in token                      | Reject with `403 Forbidden`, must validate against DB/secure source. |
+| 🔐 **User Has No Role (Unassigned)**              | Logged-in user has no role                              | Deny creation with message: "User role not assigned."                |
+| 🏛️ **HR\_MANAGER Role Not Configured in System** | Role logic missing in backend enum/map                  | Return 500 or fail gracefully with admin alert.                      |
+| 📜 **Role Hierarchy Changes Over Time**           | HR\_MANAGER may later be allowed to create Doctors      | System should use config-based role matrix, not hardcoded rules.     |
+| 🛑 **Disabled User Account**                      | Logged-in user is deactivated                           | Reject with `401 Unauthorized` or `403 Forbidden`.                   |
+| 📅 **Future Role Activation Date**                | User has role assigned but activation date is in future | Deny with message: "Role not yet active."                            |
+| 🧪 **Case-Sensitive Role Input**                  | `"doctor"` instead of `"DOCTOR"`                        | Enforce strict case or normalize input.                              |
+
+---
+
+
