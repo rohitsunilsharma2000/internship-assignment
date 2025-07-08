@@ -100,18 +100,19 @@ Here is a **complete list** of:
 ---
 
 ### ❌ Negative Case Scenarios (Denied Role Creations)
-| Logged-In User Role | Attempted Creation |    Reason                                | Working Status |
-|---------------------|--------------------|------------------------------------------|----------------|
-| **ADMIN**           | SUPER_ADMIN        | Cannot assign top-level role.            |                |
-| **ADMIN**           | ADMIN              | Cannot create peers.                     | ❌ Not Working |
-| **HR_MANAGER**      | SUPER_ADMIN        | Not permitted.                           |                |
-| **HR_MANAGER**      | ADMIN              | Beyond HR scope.                         |                |
-| **HR_MANAGER**      | DOCTOR             | Not a staff role.                        |                |
-| **DOCTOR**          | Any role           | Doctors cannot manage users.             |                |
-| **NURSE**           | Any role           | Nurses have no access to user creation.  |                |
-| **RECEPTIONIST**    | Any role           | Not permitted.                           |                |
-| **BILLING CLERK**   | Any role           | No permission.                           |                |
-| **PHARMACIST**      | Any role           | No permission.                           |                |
+
+| #  | Logged-In User Role | Attempted Creation | ❌ Reason                                | Working Status |
+|----|---------------------|--------------------|------------------------------------------|----------------|
+| 1  | **ADMIN**           | SUPER_ADMIN        | Cannot assign top-level role.            |  ✅    Working |
+| 2  | **ADMIN**           | ADMIN              | Cannot create peers.                     | ❌ Not Working |
+| 3  | **HR_MANAGER**      | SUPER_ADMIN        | Not permitted.                           |  ✅    Working |
+| 4  | **HR_MANAGER**      | ADMIN              | Beyond HR scope.                         | ❌ Not Working |
+| 5  | **HR_MANAGER**      | DOCTOR             | Not a staff role.                        | ❌ Not Working |
+| 6  | **DOCTOR**          | Any role           | Doctors cannot manage users.             | ❌ Not Working |
+| 7  | **NURSE**           | Any role           | Nurses have no access to user creation.  | ❌ Not Working |
+| 8  | **RECEPTIONIST**    | Any role           | Not permitted.                           | ❌ Not Working |
+| 9  | **BILLING CLERK**   | Any role           | No permission.                           | ❌ Not Working |
+| 10 | **PHARMACIST**      | Any role           | No permission.                           | ❌ Not Working |
 
 
 ---
